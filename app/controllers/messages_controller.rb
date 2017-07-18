@@ -1,8 +1,10 @@
 class MessagesController < ApplicationController
   def index
     @group_id = params[:group_id]
-    date = params[:date]
-    if params[:date]
+    date = params[:created_at]
+    @messages = nil
+    if params[:created_at]
+      date.to_datetime
       @messages = Message.where(created_at: date)
     elsif params[:group_id]
       @messages = Message.where(group_id: @group_id)
@@ -21,6 +23,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.permit(:content, :author, :id, :group_id, :date)
+    params.permit(:content, :author, :id, :group_id, :created_at)
   end
 end
