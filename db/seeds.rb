@@ -6,14 +6,12 @@ class Seed
   end
 
   def generate_groups_and_messages
-    Group.destroy_all
-    Message.destroy_all
 
-    5.times do |i|
-      Group.create!(
-        name: Faker::Company.name
-      )
-    end
+    # 5.times do |i|
+    #   Group.create!(
+    #     name: Faker::Company.name
+    #   )
+    # end
 
     all_groups = Group.all.order('id')
     all_groups_ids = Array.new
@@ -21,7 +19,7 @@ class Seed
       all_groups_ids.push(group.id)
     end
 
-    25.times do |i|
+    5.times do |i|
       lowest = all_groups_ids[0]
       highest = all_groups_ids[4]
       message = Message.create!(
